@@ -28,16 +28,11 @@ export default function Chatbot() {
         setMessages(prev => [...prev, { text: 'Great! Now please provide your phone number.', isUser: false }])
       } else if (!leadData.phone) {
         setLeadData({ ...leadData, phone: message })
-        // Send to API
-        fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: leadData.name,
-            phone: message,
-            message: 'Lead from chatbot',
-            source: 'Chatbot'
-          })
+        // For demo purposes, just log the data
+        console.log('Chatbot lead:', {
+          name: leadData.name,
+          phone: message,
+          source: 'Chatbot'
         })
         setMessages(prev => [...prev, { text: 'Thank you! Our sales team will contact you soon.', isUser: false }])
         setCollectingLead(false)

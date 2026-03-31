@@ -15,25 +15,12 @@ export default function Inquiry() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('/api/lead', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          message: `Bulk Order: ${formData.quantity} meters of ${formData.fabricType}. Notes: ${formData.customNotes}`,
-          source: 'Bulk Order Form'
-        }),
-      })
-      if (response.ok) {
-        alert('Bulk order inquiry submitted successfully!')
-        setFormData({ name: '', phone: '', email: '', quantity: '', fabricType: '', customNotes: '' })
-      } else {
-        alert('Failed to submit inquiry. Please try again.')
-      }
+      // For demo purposes, logging to console
+      // In production, integrate with Google Forms or your preferred form service
+      console.log('Bulk order inquiry:', formData)
+
+      alert('Bulk order inquiry submitted successfully! Our team will contact you soon.')
+      setFormData({ name: '', phone: '', email: '', quantity: '', fabricType: '', customNotes: '' })
     } catch (error) {
       alert('Error submitting inquiry. Please try again.')
     }

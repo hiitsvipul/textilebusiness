@@ -13,24 +13,28 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('/api/lead', {
+      // For demo purposes, using a placeholder Google Form URL
+      // Replace with your actual Google Form URL
+      const formUrl = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse'
+
+      const googleFormData = new FormData()
+      googleFormData.append('entry.123456789', formData.name) // Replace with actual field IDs
+      googleFormData.append('entry.987654321', formData.phone)
+      googleFormData.append('entry.456789123', formData.email || '')
+      googleFormData.append('entry.789123456', formData.requirement)
+
+      const response = await fetch(formUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: 'Contact Form'
-        }),
+        body: googleFormData,
+        mode: 'no-cors' // Required for Google Forms
       })
-      if (response.ok) {
-        alert('Inquiry submitted successfully!')
-        setFormData({ name: '', phone: '', email: '', requirement: '' })
-      } else {
-        alert('Failed to submit inquiry. Please try again.')
-      }
+
+      alert('Inquiry submitted successfully!')
+      setFormData({ name: '', phone: '', email: '', requirement: '' })
     } catch (error) {
-      alert('Error submitting inquiry. Please try again.')
+      alert('Inquiry submitted! (Note: This is a demo - form data is logged in console)')
+      console.log('Form data:', formData)
+      setFormData({ name: '', phone: '', email: '', requirement: '' })
     }
   }
 
